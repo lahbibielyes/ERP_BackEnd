@@ -3,14 +3,9 @@ package ERP.BackEnd_ERP.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +22,7 @@ public class Company {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @Column(name = "activitysector",nullable = false)
+    @Column(nullable = false)
     private String activitysector;
 
     @Column(nullable = false)
@@ -42,7 +37,7 @@ public class Company {
     @Column(nullable = false)
     private String status;
 
-    // Définir la relation OneToMany avec Contact
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    @JsonManagedReference // Empêche la récursion infinie
     private List<Contact> contacts = new ArrayList<>();
 }
