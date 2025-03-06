@@ -52,7 +52,7 @@ public class SecurityConfig {
             .authenticationManager(authenticationManager);
 
         // Ajout des filtres de sécurité JWT
-        http.addFilter(new JwtAuthenticationFilter(authenticationManager, jwtUtils));
+        http.addFilter(new JwtAuthenticationFilter(authenticationManager, jwtUtils,userService));
         http.addFilterBefore(new JwtAuthorizationFilter(authenticationManager, jwtUtils), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

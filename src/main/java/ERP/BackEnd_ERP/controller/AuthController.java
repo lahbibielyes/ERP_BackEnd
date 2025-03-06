@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ERP.BackEnd_ERP.model.User;
+import ERP.BackEnd_ERP.model.UserResetPasswordRequest;
+import ERP.BackEnd_ERP.service.EmailService;
 import ERP.BackEnd_ERP.service.UserService;
 
 @RestController
@@ -21,6 +23,20 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         User registeredUser = userService.registerUser(user);
         return ResponseEntity.ok(registeredUser);
+    }
+
+      @Autowired
+    private EmailService emailService;
+
+    @PostMapping("/reset-password")
+    public String resetPassword(@RequestBody UserResetPasswordRequest request) {
+        // Vérifier si l'utilisateur existe dans la base de données avec son username et email
+        // Exemple : vérifier dans une base de données d'utilisateurs
+
+        // Si l'utilisateur existe, envoyer un email
+        emailService.sendPasswordResetEmail(request.getEmail());
+
+        return "Un email de réinitialisation de mot de passe a été envoyé.";
     }
 
     

@@ -2,6 +2,7 @@ package ERP.BackEnd_ERP.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ERP.BackEnd_ERP.model.User;
+import ERP.BackEnd_ERP.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,10 +23,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
+    private final UserService userService ;
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
+        this.userService = userService;
         setFilterProcessesUrl("/api/auth/login");
     }
 
@@ -44,15 +47,22 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             throw new RuntimeException("Failed to read credentials", e);
         }
     }
+    
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, 
                                             FilterChain chain, Authentication authResult) 
                                             throws IOException, ServletException {
+
+        User user = userService.findByUsername(authResult.getName());
         String token = jwtUtils.generateToken(authResult.getName());
 
         Map<String, String> responseMap = new HashMap<>();
         responseMap.put("token", token);
+        responseMap.put("username", user.getUsername());
+        responseMap.put("email", user.getEmail());
+        responseMap.put("id", String.valueOf(user.getId()));
+       // responseMap.put("role", user.getRole());
 
         response.setContentType("application/json");
         response.setStatus(HttpStatus.OK.value());
