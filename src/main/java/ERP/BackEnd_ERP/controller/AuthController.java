@@ -1,5 +1,8 @@
 package ERP.BackEnd_ERP.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,16 +31,26 @@ public class AuthController {
       @Autowired
     private EmailService emailService;
 
-    @PostMapping("/reset-password")
-    public String resetPassword(@RequestBody UserResetPasswordRequest request) {
-        // Vérifier si l'utilisateur existe dans la base de données avec son username et email
-        // Exemple : vérifier dans une base de données d'utilisateurs
+  @PostMapping("/reset-password")
+public ResponseEntity<Map<String, Object>> resetPassword(@RequestBody UserResetPasswordRequest request) {
+    User user = userService.findByUsernameAndEmail(request.getUsername(), request.getEmail());
 
-        // Si l'utilisateur existe, envoyer un email
-        emailService.sendPasswordResetEmail(request.getEmail());
+    if (user != null) {
+        System.out.println(user);
+        emailService.sendPasswordResetEmail(request.getEmail(), user);
 
-        return "Un email de réinitialisation de mot de passe a été envoyé.";
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        response.put("message", "Un email de réinitialisation de mot de passe a été envoyé.");
+        
+        return ResponseEntity.ok(response);
     }
 
+    Map<String, Object> errorResponse = new HashMap<>();
+    errorResponse.put("success", false);
+    errorResponse.put("message", "Aucun utilisateur trouvé avec ce username et cet email.");
     
+    return ResponseEntity.badRequest().body(errorResponse);
+}
+
 }

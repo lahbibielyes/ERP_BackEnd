@@ -1,7 +1,6 @@
 package ERP.BackEnd_ERP.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import ERP.BackEnd_ERP.model.User;
@@ -15,4 +14,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByUsername(String username);
     boolean existsByEmail(String email);
     Optional<User> findById(Long id);
+    Optional<User> findByUsernameAndEmail(String username, String email);
 }

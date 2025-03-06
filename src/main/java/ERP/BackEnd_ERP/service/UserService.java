@@ -38,6 +38,11 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+    public User findByUsernameAndEmail(String username, String email) {
+        return userRepository.findByUsernameAndEmail(username, email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);

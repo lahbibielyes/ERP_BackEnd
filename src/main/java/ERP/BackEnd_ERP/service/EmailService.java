@@ -5,24 +5,34 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import ERP.BackEnd_ERP.model.User;
 
 @Service
 public class EmailService {
      @Autowired
     private JavaMailSender emailSender;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserService userService;
 
-    public void sendPasswordResetEmail(String toEmail) {
+    public void sendPasswordResetEmail(String toEmail,User u) {
         String newPassword = generateRandomPassword();
 
         // Envoie du mail avec un nouveau mot de passe
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("mechergui.aziz843@gmail.com");
+        message.setFrom("erptalys@gmail.com");
         message.setTo(toEmail);
         message.setSubject("Réinitialisation de votre mot de passe");
         message.setText("Votre nouveau mot de passe est : " + newPassword);
-
         emailSender.send(message);
+        u.setPassword(newPassword);
+        userService.updateUser(u.getId(), u);
+
+
     }
 
     private String generateRandomPassword() {
