@@ -62,7 +62,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         responseMap.put("username", user.getUsername());
         responseMap.put("email", user.getEmail());
         responseMap.put("id", String.valueOf(user.getId()));
-       // responseMap.put("role", user.getRole());
+       responseMap.put("role", user.getRole());
 
         response.setContentType("application/json");
         response.setStatus(HttpStatus.OK.value());
