@@ -12,12 +12,12 @@ import ERP.BackEnd_ERP.model.Company;
 public interface CompanyRepository extends JpaRepository<Company, Long> {
     
     //@Query("SELECT c FROM Company c WHERE c.name_company = :name")
-    Company findOneByName(String name);
+    Company findOneByNom(String nom);
     //List<Company> findAllCompanies();
 
 
-    List<Company> findByAddress(String adress);
-    List<Company> findByActivitysector(String sector);
-    List<Company> findByStatus(String status);
+    List<Company> findByAddresse(String adresse);
+    List<Company> findBysecteur(String secteur);
+    List<Company> findByStatut(String statut);
 
 }

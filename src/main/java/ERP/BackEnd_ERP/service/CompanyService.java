@@ -23,27 +23,32 @@ public class CompanyService  {
         return companyRepository.findById(id);
     }
 
-    public Company findByName(String name) {
-        return companyRepository.findOneByName(name);
+    public Company findByName(String nom) {
+        return companyRepository.findOneByNom(nom);
+    }
+    public List<Company> findByStatut(String statut) {
+        return companyRepository.findByStatut(statut);
     }
 
-    public List<Company> findByAddress(String adress) {
-        return companyRepository.findByAddress(adress);
+
+    public List<Company> findByAddresse(String adresse) {
+        return companyRepository.findByAddresse(adresse);
     }
 
-    public List<Company> findByActivitySector(String sector) {
-        return companyRepository.findByActivitysector(sector);
+    public List<Company> findBySecteur(String secteur) {
+        return companyRepository.findBysecteur(secteur);
     }
 
-    public List<Company> findByStatus(String status) {
+    /*public List<Company> findByStatus(String status) {
         return companyRepository.findByStatus(status);
-    }
+    }*/
 
     public void deleteCompanyById(Long id) {
         companyRepository.deleteById(id);
     }
 
     public void saveCompany(Company company) {
+        System.out.println(company);
         companyRepository.save(company);
     }
     

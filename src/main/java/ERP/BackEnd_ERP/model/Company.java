@@ -20,24 +20,65 @@ public class Company {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String name;
+    private String nom;
 
     @Column(nullable = false)
-    private String activitysector;
+    private String statut;
 
     @Column(nullable = false)
-    private String address;
-    
-    @Column(nullable = false)
-    private String email;
+    private int effectif; 
 
     @Column(nullable = false)
-    private int phone;
+    private String secteur; 
+
+
+    private String filiales; 
 
     @Column(nullable = false)
-    private String status;
+    private String provenance; 
+
+   
+    private String precisiez;
+
+    @Column(nullable = false)
+    private String responsableManager ;
+
+    @Column(nullable = false)
+    private String pole;
+
+    @Column(nullable = false)
+    private String agence  ;
+
+    @Column(nullable = false)
+    private String telephone;
+
+    private String addresse;
+
+    private String postalCode;
+
+    private String ville;
+
+    @Column(nullable = false)
+    private String pays;
+
+    private String siteWeb;
+
+    private String informations;
+
+    private String statutJuridique;
+
+    private String tva;
+
+    private String siret;
+
+    private String rcs;
+
+    private String codeApe;
+
+    private String numeroFournisseur;
+
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    @JsonManagedReference // Empêche la récursion infinie
-    private List<Contact> contacts = new ArrayList<>();
+    @JsonManagedReference
+    private List<Contact> contacts = new ArrayList<>(); 
 }
