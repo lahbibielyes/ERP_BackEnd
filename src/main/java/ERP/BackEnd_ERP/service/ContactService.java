@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ERP.BackEnd_ERP.model.Company;
 import ERP.BackEnd_ERP.model.Contact;
 import ERP.BackEnd_ERP.repository.ContactRepository;
 
@@ -23,4 +24,22 @@ public class ContactService {
         return contactRepository.findById(id);
     
 }
-}
+    public void createContact(Contact contact) {
+        System.out.println(contact);
+        contactRepository.save(contact);
+    }
+    
+    public void deleteContact(Long id) {
+        contactRepository.deleteById(id);
+    }
+     
+    }
+    
+    
+    
+  
+ 
+    
+    
+    
+

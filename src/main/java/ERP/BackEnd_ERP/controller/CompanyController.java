@@ -1,6 +1,7 @@
 package ERP.BackEnd_ERP.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,10 +9,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ERP.BackEnd_ERP.model.Besoin;
 import ERP.BackEnd_ERP.model.Company;
 import ERP.BackEnd_ERP.service.CompanyService;
 import lombok.RequiredArgsConstructor;
@@ -24,15 +27,7 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @GetMapping("/all")
-    public ResponseEntity<?> findAllCompanies() {
-        try {
-            List<Company> companies = companyService.findAllCompanies();
-            return ResponseEntity.ok().body(companies);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e);
-        }
-    }
+   
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findCompanyById(@PathVariable("id") Long id) {
@@ -83,14 +78,24 @@ public class CompanyController {
             return ResponseEntity.badRequest().body("Error: " + e);
         }
     }
+    @GetMapping("/all")
+    public ResponseEntity<?> findAllCompanies() {
+        try {
+            List<Company> companies = companyService.findAllCompanies();
+            return ResponseEntity.ok().body(companies);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error: " + e);
+        }
+    }
+    
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteCompanyById(@PathVariable("id") Long id) {
         try {
             companyService.deleteCompanyById(id);
-            return ResponseEntity.ok().body("Company deleted successfully");
+            return ResponseEntity.ok().body(Map.of("message","company deleted"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e);
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
 
@@ -98,12 +103,22 @@ public class CompanyController {
     public ResponseEntity<?> saveCompany(@RequestBody Company company) {
         try {
             companyService.saveCompany(company);
-            System.out.println("company :" +company);
-            return ResponseEntity.ok().body("Company saved successfully");
+            return ResponseEntity.ok().body(Map.of("message","company saved"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e);
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
     
+    
+    @PutMapping("/updatestatus/{id}")
+    public ResponseEntity<?> updateCompanystatus(@PathVariable Long id, @RequestBody Company company) {
+        try {
+            Company updatedCompany = companyService.updateCompanystatus(id, company);
+            return ResponseEntity.ok().body(updatedCompany);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
 
+   
 }

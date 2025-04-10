@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ERP.BackEnd_ERP.model.Company;
 import ERP.BackEnd_ERP.model.Contact;
 import ERP.BackEnd_ERP.service.ContactService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/contact")
@@ -30,6 +34,17 @@ public class ContactController {
                 .map(contact -> ResponseEntity.ok().body(contact))
                 .orElse(ResponseEntity.notFound().build());
     }
+     @PostMapping("/add")
+    public ResponseEntity<?> saveContact(@RequestBody Contact c) {
+        try {
+            contactService.createContact(c);
+            System.out.println("contact :" +c);
+            return ResponseEntity.ok().body("Contact saved successfully");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error: " + e);
+        }
+    }
+    
 
 
     

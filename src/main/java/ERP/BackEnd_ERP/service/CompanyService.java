@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import ERP.BackEnd_ERP.model.Besoin;
 import ERP.BackEnd_ERP.model.Company;
 import ERP.BackEnd_ERP.repository.CompanyRepository;
 
@@ -51,5 +53,17 @@ public class CompanyService  {
         System.out.println(company);
         companyRepository.save(company);
     }
+    
+    @Transactional
+    public Company updateCompanystatus(Long id,Company company) {
+        Company c=companyRepository.findById(company.getId())
+        .orElseThrow(()->new RuntimeException( "Company not found"));
+        
+        c.setStatut(company.getStatut());
+        
+        return companyRepository.save(c);
+    }
+    
+
     
 }
