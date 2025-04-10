@@ -25,6 +25,11 @@ public class BesoinService {
         .orElseThrow(()->new RuntimeException( "Besoin not found"));
     }
 
+    public Besoin findOneBesoinByCreationDate(Date date) {
+        return besoinRepository.findOneByCreationDate(date)
+        .orElseThrow(()->new RuntimeException( "Besoin not found"));
+    }
+
     public List<Besoin> findBesoinByTitle(String title) {
         return besoinRepository.findByTitle(title);
     }
@@ -45,6 +50,7 @@ public class BesoinService {
         b.setTitle(besoin.getTitle());
         b.setDescription(besoin.getDescription());
         b.setStatus(besoin.getStatus());
+        b.setPriority(besoin.getPriority());
         
         return besoinRepository.save(b);
     }

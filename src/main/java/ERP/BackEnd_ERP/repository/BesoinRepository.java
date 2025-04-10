@@ -21,6 +21,7 @@ public interface BesoinRepository  extends JpaRepository<Besoin, Long> {
     List<Besoin> findByStatus(String status);
     @Query("SELECT b FROM Besoin b WHERE b.contact.id = :contactId")
     List<Besoin> findByContactId(@Param("contactId") Long contactId);
+    Optional<Besoin> findOneByCreationDate(Date date);
 
     @Query("select status from Besoin")
     List<String> findStatus();

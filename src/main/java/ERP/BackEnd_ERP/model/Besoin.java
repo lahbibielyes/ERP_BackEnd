@@ -1,20 +1,8 @@
 package ERP.BackEnd_ERP.model;
 
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +10,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "besoins")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Besoin {
 
     @Id
@@ -37,12 +26,19 @@ public class Besoin {
     @Column(nullable = false)
     private String status;
 
-    @Column(name = "creation_date",nullable = false)
+    @Column(name = "creation_date", nullable = false)
     private Date creationDate;
 
-    @ManyToOne
-    @JoinColumn(name = "contact_id",referencedColumnName = "id")
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    private Contact contact;
+    @Column(name = "created_by", nullable = false)
+    private long createdBy;
 
+    @Column(name = "priority", nullable = false)    
+    private String priority;
+
+    @ManyToOne
+    @JoinColumn(name = "contact_id", referencedColumnName = "id")
+     // Évite la boucle infinie lors de la sérialisation
+     @JsonIgnoreProperties("besoins")
+     //@JsonBackReference
+    private Contact contact;
 }

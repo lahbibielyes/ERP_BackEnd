@@ -68,5 +68,14 @@ public ResponseEntity<?> saveType_action(@RequestBody Type_action type_action) {
     }
 }
 
+@GetMapping("/exists/{name}/{belongTo}")
+public ResponseEntity<?> existsByNameAndBelongTo(@PathVariable String name, @PathVariable String belongTo) {
+    try {
+        return ResponseEntity.ok().body(Map.of("message", type_actionService.existsByNameAndBelongTo(name, belongTo)));
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body(Map.of("error", "Error: " + e.getMessage()));
+    }
+}
+
     
 }

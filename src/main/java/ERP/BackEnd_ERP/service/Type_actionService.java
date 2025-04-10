@@ -38,5 +38,9 @@ public class Type_actionService {
         type_action.setBelongTo(t.getBelongTo());
         return type_actionRepository.save(type_action);
     }
+
+    public boolean existsByNameAndBelongTo(String name, String belongTo) {
+        return type_actionRepository.existsByNameAndBelongTo(name, belongTo);
+    }
     
 }

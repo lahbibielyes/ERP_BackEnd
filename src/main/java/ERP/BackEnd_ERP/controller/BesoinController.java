@@ -1,6 +1,7 @@
 package ERP.BackEnd_ERP.controller;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +76,22 @@ public class BesoinController {
         }
     }
 
+    @GetMapping("/date/{date}")
+public ResponseEntity<?> findOneBesoinByCreationDate(@PathVariable("date") String dateStr) {
+    try {
+        // On attend que la date soit au format "yyyy-MM-dd HH:mm:ss"
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        java.util.Date utilDate = formatter.parse(dateStr);
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        
+        Besoin besoin = besoinService.findOneBesoinByCreationDate(sqlDate);
+        return ResponseEntity.ok().body(besoin);
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body("Error: " + e);
+    }
+}
+
+
     @GetMapping("/{id}")
     public ResponseEntity<?> findBesoinById(@PathVariable Long id) {
         try {
@@ -108,7 +125,7 @@ public ResponseEntity<?> saveBesoin(@RequestBody Besoin besoin) {
         besoinService.saveBesoin(besoin);
         return ResponseEntity.ok().body(Map.of("message","besoin saved")); // Return the created object, or an appropriate response
     } catch (Exception e) {
-        return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
     }
 }
 

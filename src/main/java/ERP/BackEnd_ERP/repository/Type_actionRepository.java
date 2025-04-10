@@ -12,4 +12,5 @@ public interface Type_actionRepository extends JpaRepository<Type_action, Long> 
 
     Type_action findById(long id);
     List<Type_action> findByBelongTo(String belongTo);
+    boolean existsByNameAndBelongTo(String name, String belongTo);
 } 
