@@ -2,10 +2,8 @@ package ERP.BackEnd_ERP.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -78,7 +76,8 @@ public class Company {
     private String numeroFournisseur;
 
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Contact> contacts = new ArrayList<>(); 
+    
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("company") // Quand on sérialise les contacts, on ignore leur champ "company"
+    private List<Contact> contacts = new ArrayList<>();
 }
