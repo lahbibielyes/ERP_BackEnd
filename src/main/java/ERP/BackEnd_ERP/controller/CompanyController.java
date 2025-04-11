@@ -110,6 +110,15 @@ public class CompanyController {
     }
     
     
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateCompany(@PathVariable Long id, @RequestBody Company company) {
+        try {
+            Company updatedCompany = companyService.updateCompany(id, company);
+            return ResponseEntity.ok().body(updatedCompany);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
     @PutMapping("/updatestatus/{id}")
     public ResponseEntity<?> updateCompanystatus(@PathVariable Long id, @RequestBody Company company) {
         try {
@@ -119,6 +128,7 @@ public class CompanyController {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
+   
 
    
 }

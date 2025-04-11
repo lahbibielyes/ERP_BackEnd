@@ -63,7 +63,39 @@ public class CompanyService  {
         
         return companyRepository.save(c);
     }
-    
+
+    @Transactional
+    public Company updateCompany(Long id, Company company) {
+        Company c = companyRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Company not found"));
+        
+        // Update all fields except ID
+        c.setNom(company.getNom());
+        c.setStatut(company.getStatut());
+        c.setEffectif(company.getEffectif());
+        c.setSecteur(company.getSecteur());
+        c.setFiliales(company.getFiliales());
+        c.setProvenance(company.getProvenance());
+        c.setPrecisiez(company.getPrecisiez());
+        c.setResponsableManager(company.getResponsableManager());
+        c.setPole(company.getPole());
+        c.setAgence(company.getAgence());
+        c.setTelephone(company.getTelephone());
+        c.setAddresse(company.getAddresse());
+        c.setPostalCode(company.getPostalCode());
+        c.setVille(company.getVille());
+        c.setPays(company.getPays());
+        c.setSiteWeb(company.getSiteWeb());
+        c.setInformations(company.getInformations());
+        c.setStatutJuridique(company.getStatutJuridique());
+        c.setTva(company.getTva());
+        c.setSiret(company.getSiret());
+        c.setRcs(company.getRcs());
+        c.setCodeApe(company.getCodeApe());
+        c.setNumeroFournisseur(company.getNumeroFournisseur());
+        
+        return companyRepository.save(c);
+    }
 
     
 }
