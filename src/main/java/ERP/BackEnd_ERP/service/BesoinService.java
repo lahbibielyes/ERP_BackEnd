@@ -51,6 +51,7 @@ public class BesoinService {
         b.setDescription(besoin.getDescription());
         b.setStatus(besoin.getStatus());
         b.setPriority(besoin.getPriority());
+        b.setManagerResponsable(besoin.getManagerResponsable());
         
         return besoinRepository.save(b);
     }

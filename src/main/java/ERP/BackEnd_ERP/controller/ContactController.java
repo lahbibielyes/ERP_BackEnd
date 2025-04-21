@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ERP.BackEnd_ERP.model.Company;
 import ERP.BackEnd_ERP.model.Contact;
 import ERP.BackEnd_ERP.service.ContactService;
 import org.springframework.web.bind.annotation.PostMapping;

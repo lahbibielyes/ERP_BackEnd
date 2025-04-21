@@ -36,6 +36,11 @@ public class Besoin {
     private String priority;
 
     @ManyToOne
+    @JoinColumn(name = "manager_responsable", referencedColumnName = "id",nullable = true)
+    @JsonIgnoreProperties("besoins")
+    private User managerResponsable;
+
+    @ManyToOne
     @JoinColumn(name = "contact_id", referencedColumnName = "id")
      // Évite la boucle infinie lors de la sérialisation
      @JsonIgnoreProperties("besoins")

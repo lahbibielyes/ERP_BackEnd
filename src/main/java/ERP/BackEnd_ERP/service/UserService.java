@@ -12,6 +12,7 @@ import ERP.BackEnd_ERP.model.User;
 import ERP.BackEnd_ERP.repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -47,6 +48,9 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
+    }
+    public List<User> findUsersByRole(String role) {
+        return userRepository.findByRole(role);
     }
 
     @Transactional
