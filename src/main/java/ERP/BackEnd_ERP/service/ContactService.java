@@ -37,16 +37,16 @@ public class ContactService {
         Contact c=contactRepository.findById(contact.getId())
         .orElseThrow(()->new RuntimeException( "Contact not found"));
         
-        c.setStatut(contact.getStatut());
+        c.setStatus(contact.getStatus());
         
         return contactRepository.save(c);
     }
     @Transactional
-    public Contact updateContactstatut(Long id,String statut) {
+    public Contact updateContactstatus(Long id,String status) {
         Contact c=contactRepository.findById(id)
         .orElseThrow(()->new RuntimeException( "Contact not found"));
         System.out.println("contact"+c);
-        c.setStatut(statut);
+        c.setStatus(status);
         
         return contactRepository.save(c);
     }
@@ -57,44 +57,44 @@ public class ContactService {
                 .orElseThrow(() -> new RuntimeException("Contact not found"));
         
         // Mise à jour de tous les champs
-        c.setCivilite(contact.getCivilite());
-        c.setNom(contact.getNom());
-        c.setPrenom(contact.getPrenom());
-        c.setFonction(contact.getFonction());
+        c.setCivility(contact.getCivility());
+        c.setLastname(contact.getLastname());
+        c.setFirstname(contact.getFirstname());
+        c.setFunction(contact.getFunction());
         c.setService(contact.getService());
         c.setManager(contact.getManager());
         c.setType(contact.getType());
-        c.setStatut(contact.getStatut());
+        c.setStatus(contact.getStatus());
         c.setProvenance(contact.getProvenance());
-        c.setPrecisiez(contact.getPrecisiez());
-        c.setAgence(contact.getAgence());
+        c.setPrecision(contact.getPrecision());
+        c.setAgency(contact.getAgency());
         c.setEmail(contact.getEmail());
-        c.setTelephone(contact.getTelephone());
-        c.setAdresse(contact.getAdresse());
+        c.setPhone(contact.getPhone());
+        c.setAddress(contact.getAddress());
         c.setPostalCode(contact.getPostalCode());
-        c.setVille(contact.getVille());
-        c.setPays(contact.getPays());
-        c.setReseauxsociaux(contact.getReseauxsociaux());
-        c.setPerimetreTechnique(contact.getPerimetreTechnique());
+        c.setCity(contact.getCity());
+        c.setCountry(contact.getCountry());
+        c.setSocialMedea(contact.getSocialMedea());
+        c.setTechnicalPerimeter(contact.getTechnicalPerimeter());
         
         // Pour les listes, on peut soit les remplacer complètement, soit faire un addAll après clear
-        if (contact.getDomaines() != null) {
-            c.getDomaines().clear();
-            c.getDomaines().addAll(contact.getDomaines());
+        if (contact.getDomains() != null) {
+            c.getDomains().clear();
+            c.getDomains().addAll(contact.getDomains());
         }
         
-        if (contact.getOutils() != null) {
-            c.getOutils().clear();
-            c.getOutils().addAll(contact.getOutils());
+        if (contact.getTools() != null) {
+            c.getTools().clear();
+            c.getTools().addAll(contact.getTools());
         }
         
-        c.setInformationsComplementaires(contact.getInformationsComplementaires());
+        c.setComplementaryInformations(contact.getComplementaryInformations());
         c.setCompany(contact.getCompany());
         
         return contactRepository.save(c);
     }
-      public List<Contact> findByStatut(String statut) {
-        return contactRepository.findByStatut(statut);
+      public List<Contact> findByStatus(String status) {
+        return contactRepository.findByStatus(status);
     }
     public void deleteContactById(Long id) {
         contactRepository.deleteById(id);

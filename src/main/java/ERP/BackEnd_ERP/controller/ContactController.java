@@ -74,18 +74,18 @@ public class ContactController {
         }
     }
     @PutMapping("/updatestatut/{id}")
-    public ResponseEntity<?> updateContactstatut(@PathVariable Long id, @RequestBody String statut) {
+    public ResponseEntity<?> updateContactstatut(@PathVariable Long id, @RequestBody String status) {
         try {
-            Contact updatedContact = contactService.updateContactstatut(id, statut);
+            Contact updatedContact = contactService.updateContactstatus(id, status);
             return ResponseEntity.ok().body(updatedContact);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
     @GetMapping("/statut/{statut}")
-    public ResponseEntity<?> findByStatus(@PathVariable("statut") String statut) {
+    public ResponseEntity<?> findByStatus(@PathVariable("statut") String status) {
         try {
-            List<Contact> contacts = contactService.findByStatut(statut);
+            List<Contact> contacts = contactService.findByStatus(status);
             return ResponseEntity.ok().body(contacts);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());

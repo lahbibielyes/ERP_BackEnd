@@ -17,30 +17,34 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String civilite;
+    private String civility;
 
-    private String nom;
-    private String prenom;
-    private String fonction;
+    private String firstname;
+    private String lastname;
+    private String function;
     private String service;
     private String manager;
     private String type;
-    private String statut;
+    private String status;
     private String provenance;
 
-    private String precisiez;
-    private String agence;
+    private String precision;
+    private String agency;
     private String email;
-    private String telephone;
-    private String adresse;
+    private String phone;
+    private String address;
     private String postalCode;
-    private String ville;
-    private String pays;
-    private String reseauxsociaux;
-    private String perimetreTechnique;
-    private List<String> Domaines= new ArrayList<>();
-    private List<String> outils = new ArrayList<>();
-    private String informationsComplementaires;
+    private String city;
+    private String country;
+
+    @Column(name = "social_media") 
+    private String socialMedea;
+    @Column(name = "technical_perimeter")
+    private String technicalPerimeter;
+    private List<String> Domains= new ArrayList<>();
+    private List<String> tools = new ArrayList<>();
+    @Column(name = "complementary_informations")
+    private String complementaryInformations;
 
     
 
