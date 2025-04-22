@@ -17,21 +17,32 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String civilite;
 
-    @Column(nullable = false)
-    private String firstname;
+    private String nom;
+    private String prenom;
+    private String fonction;
+    private String service;
+    private String manager;
+    private String type;
+    private String statut;
+    private String provenance;
 
-    @Column(nullable = false)
-    private String lastname;
-
-    @Column(nullable = false)  
+    private String precisiez;
+    private String agence;
     private String email;
+    private String telephone;
+    private String adresse;
+    private String postalCode;
+    private String ville;
+    private String pays;
+    private String reseauxsociaux;
+    private String perimetreTechnique;
+    private List<String> Domaines= new ArrayList<>();
+    private List<String> outils = new ArrayList<>();
+    private String informationsComplementaires;
 
-    @Column(nullable = false)
-    private int phone;
-
-    @Column(nullable = false)
-    private String function;
+    
 
     @ManyToOne
     @JoinColumn(name = "company_id", referencedColumnName = "id")

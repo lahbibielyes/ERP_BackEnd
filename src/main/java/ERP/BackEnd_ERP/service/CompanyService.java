@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ERP.BackEnd_ERP.model.Besoin;
+
 import ERP.BackEnd_ERP.model.Company;
 import ERP.BackEnd_ERP.repository.CompanyRepository;
 
