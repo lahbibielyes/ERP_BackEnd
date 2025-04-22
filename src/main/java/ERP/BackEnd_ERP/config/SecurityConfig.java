@@ -42,15 +42,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ✅ Ajout de CORS ici
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-<<<<<<< HEAD
 
                 .requestMatchers("/api/auth/**" , "/api/company/**","/api/user/**","/api/besoin/**","/api/contact/**","/api/historique_besoin/**","/api/type-actions/**").permitAll()
-=======
-                .requestMatchers("/api/auth/**" , "/api/company/**","/api/user/**","/api/besoin/**","/api/contact/**","/api/action-besoin/**").permitAll()
->>>>>>> 273009c2165c10dd6c1d9f26e43cb92e088cd299
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
