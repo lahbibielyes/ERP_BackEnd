@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ERP.BackEnd_ERP.model.User;
 import ERP.BackEnd_ERP.service.UserService;
 
+
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -30,5 +31,11 @@ public class UserController {
         User user = userService.findUserById(id);
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping("/role/{role}")
+    public ResponseEntity<?> findUsersByRole(@PathVariable String role) {
+        return ResponseEntity.ok(userService.findUsersByRole(role));
+    }
+    
     
 }

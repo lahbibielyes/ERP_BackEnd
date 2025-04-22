@@ -24,7 +24,7 @@ public class EmailService {
 
         // Envoie du mail avec un nouveau mot de passe
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("erptalys@gmail.com");
+        message.setFrom("erptalyscompany@gmail.com");
         message.setTo(toEmail);
         message.setSubject("Réinitialisation de votre mot de passe");
         message.setText("Votre nouveau mot de passe est : " + newPassword);
