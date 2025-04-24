@@ -77,6 +77,7 @@ public ResponseEntity<?> createActionBesoinWithFiles(
         System.out.println("Action_besoin: " + action_besoin);
         ObjectMapper mapper = new ObjectMapper();
         Action_besoin action_besoinObj = mapper.readValue(action_besoin, Action_besoin.class);
+        System.out.println("Action_besoinObj: " + action_besoinObj);
 
         action_besoinObj.setDateAction(new java.util.Date());
 
@@ -90,7 +91,7 @@ public ResponseEntity<?> createActionBesoinWithFiles(
 
         
     } catch (Exception e) {
-        System.out.println(e.getMessage());
+        System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"+e.getMessage());
         return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
        
     }
@@ -115,6 +116,7 @@ public ResponseEntity<?> createActionBesoinWithFiles(
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteAction_besoinById(@PathVariable("id") Long id) {
         try {
+            System.out.println("iddddddddddddddddddddddddddddddd "+ id);
             actionService.deleteAction(id);
             return ResponseEntity.ok().body(Map.of("message", "Action_besoin deleted successfully"));
         } catch (Exception e) {
@@ -127,6 +129,7 @@ public ResponseEntity<?> createActionBesoinWithFiles(
         try {
             return ResponseEntity.ok().body(actionService.findByBesoinId(besoinId));
         } catch (Exception e) {
+            System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"+e.getMessage());
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
     }
@@ -141,7 +144,7 @@ public ResponseEntity<?> createActionBesoinWithFiles(
             actionService.updateAction(id, action_besoinObj, file);
             return ResponseEntity.ok().body(Map.of("message","Action_besoin updated successfully"));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("eeeeeeeeeeeeeeeeeeeeeeeee"+e.getMessage());
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
             
         }

@@ -37,7 +37,7 @@ public class Besoin {
 
     @ManyToOne
     @JoinColumn(name = "manager_responsable", referencedColumnName = "id",nullable = true)
-    @JsonIgnoreProperties("besoins")
+    @JsonIgnoreProperties("managedBesoins")
     private User managerResponsable;
 
     @ManyToOne

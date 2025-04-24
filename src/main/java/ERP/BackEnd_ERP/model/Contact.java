@@ -28,7 +28,7 @@ public class Contact {
     private String status;
     private String provenance;
 
-    private String precision;
+    private String precisionValue;
     private String agency;
     private String email;
     private String phone;
@@ -38,7 +38,7 @@ public class Contact {
     private String country;
 
     @Column(name = "social_media") 
-    private String socialMedea;
+    private String socialMedia;
     @Column(name = "technical_perimeter")
     private String technicalPerimeter;
     private List<String> Domains= new ArrayList<>();

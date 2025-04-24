@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import ERP.BackEnd_ERP.model.Action_besoin;
@@ -118,10 +119,12 @@ public void addAction(Action_besoin action_besoin, MultipartFile[] files) throws
     }
     
     
-
+    @Transactional
     public void deleteAction(Long id) throws IOException{
         Action_besoin existingAction=action_besoinRepository.findById(id)
         .orElseThrow(()->new RuntimeException( "Action not found"));
+
+        System.out.println("existingAction"+existingAction);
 
         if(existingAction!=null){
             if(existingAction.getAttachments()!=null){
@@ -130,8 +133,9 @@ public void addAction(Action_besoin action_besoin, MultipartFile[] files) throws
                     Files.deleteIfExists(filePath);
                 }
             }
-            action_besoinRepository.deleteById(id);
+            
         }
+        action_besoinRepository.deleteAction(id);
 
     }
 
