@@ -39,10 +39,10 @@ public class CompanyController {
         }
     }
 
-    @GetMapping("/nom/{nom}")
-    public ResponseEntity<?> findByName(@PathVariable("nom") String nom) {
+    @GetMapping("/name/{nom}")
+    public ResponseEntity<?> findByName(@PathVariable("nom") String name) {
         try {
-            Company company = companyService.findByName(nom);
+            Company company = companyService.findByName(name);
             return ResponseEntity.ok().body(company);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error: " + e);
@@ -50,9 +50,9 @@ public class CompanyController {
     }
 
     @GetMapping("/addrese/{addresse}")
-    public ResponseEntity<?> findByAddresse(@PathVariable("addresse") String adresse) {
+    public ResponseEntity<?> findByAddress(@PathVariable("addresse") String address) {
         try {
-            List<Company> companies = companyService.findByAddresse(adresse);
+            List<Company> companies = companyService.findByAddress(address);
             return ResponseEntity.ok().body(companies);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error: " + e);
@@ -60,9 +60,9 @@ public class CompanyController {
     }
 
     @GetMapping("/secteur/{secteur}")
-    public ResponseEntity<?> findByActivitySector(@PathVariable("secteur") String secteur) {
+    public ResponseEntity<?> findBySector(@PathVariable("secteur") String sector) {
         try {
-            List<Company> companies = companyService.findBySecteur(secteur);
+            List<Company> companies = companyService.findBySector(sector);
             return ResponseEntity.ok().body(companies);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error: " + e);
@@ -70,9 +70,9 @@ public class CompanyController {
     }
 
     @GetMapping("/statut/{statut}")
-    public ResponseEntity<?> findByStatus(@PathVariable("statut") String statut) {
+    public ResponseEntity<?> findByStatus(@PathVariable("statut") String status) {
         try {
-            List<Company> companies = companyService.findByStatut(statut);
+            List<Company> companies = companyService.findByStatus(status);
             return ResponseEntity.ok().body(companies);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error: " + e);

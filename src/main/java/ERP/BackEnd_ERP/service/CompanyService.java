@@ -24,20 +24,20 @@ public class CompanyService  {
         return companyRepository.findById(id);
     }
 
-    public Company findByName(String nom) {
-        return companyRepository.findOneByNom(nom);
+    public Company findByName(String name) {
+        return companyRepository.findOneByName(name);
     }
-    public List<Company> findByStatut(String statut) {
-        return companyRepository.findByStatut(statut);
-    }
-
-
-    public List<Company> findByAddresse(String adresse) {
-        return companyRepository.findByAddresse(adresse);
+    public List<Company> findByStatus(String status) {
+        return companyRepository.findByStatus(status);
     }
 
-    public List<Company> findBySecteur(String secteur) {
-        return companyRepository.findBysecteur(secteur);
+
+    public List<Company> findByAddress(String address) {
+        return companyRepository.findByAddress(address);
+    }
+
+    public List<Company> findBySector(String sector) {
+        return companyRepository.findBysector(sector);
     }
 
     /*public List<Company> findByStatus(String status) {
@@ -58,7 +58,7 @@ public class CompanyService  {
         Company c=companyRepository.findById(company.getId())
         .orElseThrow(()->new RuntimeException( "Company not found"));
         
-        c.setStatut(company.getStatut());
+        c.setStatus(company.getStatus());
         
         return companyRepository.save(c);
     }
@@ -69,29 +69,29 @@ public class CompanyService  {
                 .orElseThrow(() -> new RuntimeException("Company not found"));
         
         // Update all fields except ID
-        c.setNom(company.getNom());
-        c.setStatut(company.getStatut());
-        c.setEffectif(company.getEffectif());
-        c.setSecteur(company.getSecteur());
-        c.setFiliales(company.getFiliales());
-        c.setProvenance(company.getProvenance());
-        c.setPrecisiez(company.getPrecisiez());
-        c.setResponsableManager(company.getResponsableManager());
+        c.setName(company.getName());
+        c.setStatus(company.getStatus());
+        c.setEffective(company.getEffective());
+        c.setSector(company.getSector());
+        
+       
+        
+        
         c.setPole(company.getPole());
-        c.setAgence(company.getAgence());
-        c.setTelephone(company.getTelephone());
-        c.setAddresse(company.getAddresse());
+        c.setAgency(company.getAgency());
+        c.setPhone(company.getPhone());
+        c.setAddress(company.getAddress());
         c.setPostalCode(company.getPostalCode());
-        c.setVille(company.getVille());
-        c.setPays(company.getPays());
-        c.setSiteWeb(company.getSiteWeb());
+        c.setCity(company.getCity());
+        c.setCountry(company.getCountry());
+        
         c.setInformations(company.getInformations());
-        c.setStatutJuridique(company.getStatutJuridique());
-        c.setTva(company.getTva());
+        c.setLegalStatus(company.getLegalStatus());
+        
         c.setSiret(company.getSiret());
-        c.setRcs(company.getRcs());
-        c.setCodeApe(company.getCodeApe());
-        c.setNumeroFournisseur(company.getNumeroFournisseur());
+       
+        c.setApeCode(company.getApeCode());
+        
         
         return companyRepository.save(c);
     }

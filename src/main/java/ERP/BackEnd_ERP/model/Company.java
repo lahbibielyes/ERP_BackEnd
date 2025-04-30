@@ -18,65 +18,48 @@ public class Company {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String nom;
+    private String name;
 
     @Column(nullable = false)
-    private String statut;
+    private String status;
 
     @Column(nullable = false)
-    private int effectif; 
+    private int effective; 
 
     @Column(nullable = false)
-    private String secteur; 
-
-
-    private String filiales; 
-
-    @Column(nullable = false)
-    private String provenance; 
-
-   
-    private String precisiez;
-
-    @Column(nullable = false)
-    private String responsableManager ;
+    private String sector; 
 
     @Column(nullable = false)
     private String pole;
 
     @Column(nullable = false)
-    private String agence  ;
+    private String agency  ;
 
     @Column(nullable = false)
-    private String telephone;
+    private String phone;
 
-    private String addresse;
+    private String address;
 
+    @Column(name = "postal_code")    
     private String postalCode;
 
-    private String ville;
+    private String city;
 
     @Column(nullable = false)
-    private String pays;
+    private String country;
 
-    private String siteWeb;
-
+   
     private String informations;
 
-    private String statutJuridique;
+    @Column(name = "legal_status")
+    private String legalStatus;
 
-    private String tva;
 
     private String siret;
 
-    private String rcs;
+    @Column(name = "ape_code")
+    private String apeCode;
 
-    private String codeApe;
-
-    private String numeroFournisseur;
-
-
-    
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("company") // Quand on sérialise les contacts, on ignore leur champ "company"
     private List<Contact> contacts = new ArrayList<>();
