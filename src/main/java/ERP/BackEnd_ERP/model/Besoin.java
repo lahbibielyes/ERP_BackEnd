@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "besoins")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Besoin {
 
     @Id
@@ -37,13 +36,11 @@ public class Besoin {
 
     @ManyToOne
     @JoinColumn(name = "manager_responsable", referencedColumnName = "id",nullable = true)
-    @JsonIgnoreProperties("besoins")
+    @JsonIgnoreProperties("managedBesoins")
     private User managerResponsable;
 
     @ManyToOne
     @JoinColumn(name = "contact_id", referencedColumnName = "id")
-     // Évite la boucle infinie lors de la sérialisation
-     @JsonIgnoreProperties("besoins")
-     //@JsonBackReference
+    @JsonIgnoreProperties("besoins")
     private Contact contact;
 }

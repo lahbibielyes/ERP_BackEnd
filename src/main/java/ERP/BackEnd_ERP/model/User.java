@@ -48,9 +48,12 @@ public class User {
         @Column(unique = true, nullable = false)
         private String email;
 
+        @Column(nullable = false)
+        private String status;
+
         @OneToMany(mappedBy = "managerResponsable",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
         @JsonIgnoreProperties("managerResponsable")
-        private List<Besoin> besoins;
+        private List<Besoin> managedBesoins;
 
         @OneToMany(mappedBy = "manager",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
         @JsonIgnoreProperties("manager")

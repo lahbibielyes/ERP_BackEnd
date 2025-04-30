@@ -22,11 +22,7 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
-        User registeredUser = userService.registerUser(user);
-        return ResponseEntity.ok(registeredUser);
-    }
+    
 
       @Autowired
     private EmailService emailService;
@@ -41,7 +37,7 @@ public ResponseEntity<Map<String, Object>> resetPassword(@RequestBody UserResetP
 
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
-        response.put("message", "Un email de réinitialisation de mot de passe a été envoyé.");
+        response.put("message", "Un email de réinitialisation de mot de passe a été envoyé, Veuillez vérifier votre boîte de réception.");
         
         return ResponseEntity.ok(response);
     }

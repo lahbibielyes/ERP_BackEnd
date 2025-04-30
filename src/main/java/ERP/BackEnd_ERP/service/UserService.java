@@ -53,6 +53,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findByRole(role);
     }
 
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
+
     @Transactional
     public User updateUser(Long id, User u){
         User user = userRepository.findById(id)
@@ -62,11 +66,29 @@ public class UserService implements UserDetailsService {
         user.setPhone(u.getPhone());
         user.setFirstname(u.getFirstname());
         user.setLastname(u.getLastname());
+        user.setStatus(u.getStatus());
+        user.setRole(u.getRole());
         
         // Vérifier si le mot de passe est différent avant d'encoder
         if (u.getPassword() != null && !u.getPassword().isEmpty()) {
             user.setPassword(passwordEncoder.encode(u.getPassword()));
         }
+
+        return userRepository.save(user);
+    }
+
+
+    @Transactional
+    public User updateUserExceptPassword(Long id, User u){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setEmail(u.getEmail());
+        user.setPhone(u.getPhone());
+        user.setFirstname(u.getFirstname());
+        user.setLastname(u.getLastname());
+        user.setStatus(u.getStatus());
+        user.setRole(u.getRole());
 
         return userRepository.save(user);
     }
