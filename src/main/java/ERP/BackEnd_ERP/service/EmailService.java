@@ -5,7 +5,6 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ERP.BackEnd_ERP.model.User;
@@ -14,8 +13,6 @@ import ERP.BackEnd_ERP.model.User;
 public class EmailService {
      @Autowired
     private JavaMailSender emailSender;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
     @Autowired
     private UserService userService;
 
@@ -140,7 +137,7 @@ public class EmailService {
     private String generateRandomPassword() {
         // Génère un mot de passe aléatoire
         int length = 8;
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-*$#@!";
         Random rand = new Random();
         StringBuilder password = new StringBuilder();
 
