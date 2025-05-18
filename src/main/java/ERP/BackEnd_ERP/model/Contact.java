@@ -29,23 +29,23 @@ public class Contact {
     private String status;
     private String provenance;
 
-    @Column(name = "precision_value")
-    private String precisionValue;
+    
     private String agency;
     private String email;
     private String phone;
     private String address;
+    @Column(name = "postal_code")    
+    private String postalCode;
+
+    private String city;
    
     private String country;
 
-    @Column(name = "social_media") 
-    private String socialMedia;
-    @Column(name = "technical_perimeter")
-    private String technicalPerimeter;
+   
+   
     private List<String> Domains= new ArrayList<>();
     private List<String> tools = new ArrayList<>();
-    @Column(name = "complementary_informations")
-    private String complementaryInformations;
+   
 
     @Column(name = "creation_date")
     private Date creationDate;

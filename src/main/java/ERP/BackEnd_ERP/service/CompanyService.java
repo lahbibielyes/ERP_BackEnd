@@ -55,7 +55,7 @@ public class CompanyService  {
     
     @Transactional
     public Company updateCompanystatus(Long id,Company company) {
-        Company c=companyRepository.findById(company.getId())
+        Company c=companyRepository.findById(id)
         .orElseThrow(()->new RuntimeException( "Company not found"));
         
         c.setStatus(company.getStatus());
@@ -73,11 +73,15 @@ public class CompanyService  {
         c.setStatus(company.getStatus());
         c.setEffective(company.getEffective());
         c.setSector(company.getSector());
-        
+        c.setProvenance(company.getProvenance());
+        c.setFiliales(company.getFiliales());
+        c.setPrecise(company.getPrecise());
+        c.setEmail(company.getEmail());
+
        
         
         
-        c.setPole(company.getPole());
+       
         c.setAgency(company.getAgency());
         c.setPhone(company.getPhone());
         c.setAddress(company.getAddress());
@@ -86,11 +90,7 @@ public class CompanyService  {
         c.setCountry(company.getCountry());
         
         c.setInformations(company.getInformations());
-        c.setLegalStatus(company.getLegalStatus());
-        
-        c.setSiret(company.getSiret());
        
-        c.setApeCode(company.getApeCode());
         
         
         return companyRepository.save(c);

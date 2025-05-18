@@ -69,8 +69,8 @@ public class CompanyController {
         }
     }
 
-    @GetMapping("/statut/{statut}")
-    public ResponseEntity<?> findByStatus(@PathVariable("statut") String status) {
+    @GetMapping("/status/{status}")
+    public ResponseEntity<?> findByStatus(@PathVariable("status") String status) {
         try {
             List<Company> companies = companyService.findByStatus(status);
             return ResponseEntity.ok().body(companies);
@@ -82,6 +82,7 @@ public class CompanyController {
     public ResponseEntity<?> findAllCompanies() {
         try {
             List<Company> companies = companyService.findAllCompanies();
+            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+companies);
             return ResponseEntity.ok().body(companies);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error: " + e);

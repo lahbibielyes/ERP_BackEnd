@@ -66,15 +66,17 @@ public class ContactService {
         c.setType(contact.getType());
         c.setStatus(contact.getStatus());
         c.setProvenance(contact.getProvenance());
-        c.setPrecisionValue(contact.getPrecisionValue());
+        
         c.setAgency(contact.getAgency());
         c.setEmail(contact.getEmail());
         c.setPhone(contact.getPhone());
         c.setAddress(contact.getAddress());
+        c.setPostalCode(contact.getPostalCode());
+        c.setCity(contact.getCity());
        
         c.setCountry(contact.getCountry());
-        c.setSocialMedia(contact.getSocialMedia());
-        c.setTechnicalPerimeter(contact.getTechnicalPerimeter());
+        
+        
         
         // Pour les listes, on peut soit les remplacer complètement, soit faire un addAll après clear
         if (contact.getDomains() != null) {
@@ -87,7 +89,7 @@ public class ContactService {
             c.getTools().addAll(contact.getTools());
         }
         
-        c.setComplementaryInformations(contact.getComplementaryInformations());
+      
         c.setCompany(contact.getCompany());
         
         return contactRepository.save(c);

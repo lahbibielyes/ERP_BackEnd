@@ -1,6 +1,7 @@
 package ERP.BackEnd_ERP.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -20,7 +21,7 @@ public class Company {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    
     private String status;
 
     @Column(nullable = false)
@@ -29,8 +30,13 @@ public class Company {
     @Column(nullable = false)
     private String sector; 
 
-    @Column(nullable = false)
-    private String pole;
+    private String provenance;
+
+    private String filiales;
+
+    private String precise;
+
+    
 
     @Column(nullable = false)
     private String agency  ;
@@ -39,28 +45,31 @@ public class Company {
     private String phone;
 
     private String address;
+    private String email;
 
     @Column(name = "postal_code")    
     private String postalCode;
 
     private String city;
 
-    @Column(nullable = false)
+    @Column()
     private String country;
 
    
     private String informations;
 
-    @Column(name = "legal_status")
-    private String legalStatus;
+  
 
+  
 
-    private String siret;
+    @Column(name = "creation_date")
+    private Date creationDate;
 
-    @Column(name = "ape_code")
-    private String apeCode;
+    @Column(name = "created_by")
+    private Long createdBy;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("company") // Quand on sérialise les contacts, on ignore leur champ "company"
     private List<Contact> contacts = new ArrayList<>();
+    
 }
