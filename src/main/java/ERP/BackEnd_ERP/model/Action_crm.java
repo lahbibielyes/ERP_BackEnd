@@ -46,7 +46,7 @@ public class Action_crm {
     private long createdBy;
 
     @Column(name = "contact_id", nullable = false)
-    private Long contactId;
+    private long contactId;
 
     @ManyToOne
     @JoinColumn(name = "manager", referencedColumnName = "id",nullable = true)
