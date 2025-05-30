@@ -32,25 +32,7 @@ public class ContactService {
     public void deleteContact(Long id) {
         contactRepository.deleteById(id);
     }
-     @Transactional
-    public Contact updateContactstatus(Long id,Contact contact) {
-        Contact c=contactRepository.findById(contact.getId())
-        .orElseThrow(()->new RuntimeException( "Contact not found"));
-        
-        c.setStatus(contact.getStatus());
-        
-        return contactRepository.save(c);
-    }
-    @Transactional
-    public Contact updateContactstatus(Long id,String status) {
-        Contact c=contactRepository.findById(id)
-        .orElseThrow(()->new RuntimeException( "Contact not found"));
-        System.out.println("contact"+c);
-        c.setStatus(status);
-        
-        return contactRepository.save(c);
-    }
-
+ 
     @Transactional
     public Contact updateContact(Long id, Contact contact) {
         Contact c = contactRepository.findById(id)
@@ -64,7 +46,10 @@ public class ContactService {
         c.setService(contact.getService());
         c.setCreatedBy(contact.getCreatedBy());
         c.setType(contact.getType());
-        c.setStatus(contact.getStatus());
+        c.setOtherDomains(contact.getOtherDomains());
+        c.setOtherTools(contact.getOtherTools());
+        
+       
         c.setProvenance(contact.getProvenance());
         
         c.setAgency(contact.getAgency());
@@ -94,9 +79,7 @@ public class ContactService {
         
         return contactRepository.save(c);
     }
-      public List<Contact> findByStatus(String status) {
-        return contactRepository.findByStatus(status);
-    }
+     
     public void deleteContactById(Long id) {
         contactRepository.deleteById(id);
     }

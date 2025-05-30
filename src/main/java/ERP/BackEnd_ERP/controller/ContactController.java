@@ -64,33 +64,9 @@ public class ContactController {
         }
     }
     
-    @PutMapping("/updatestatus/{id}")
-    public ResponseEntity<?> updateContactstatus(@PathVariable Long id, @RequestBody Contact contact) {
-        try {
-            Contact updatedContact = contactService.updateContactstatus(id, contact);
-            return ResponseEntity.ok().body(updatedContact);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
-    }
-    @PutMapping("/updatestatut/{id}")
-    public ResponseEntity<?> updateContactstatut(@PathVariable Long id, @RequestBody String status) {
-        try {
-            Contact updatedContact = contactService.updateContactstatus(id, status);
-            return ResponseEntity.ok().body(updatedContact);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
-    }
-    @GetMapping("/statut/{statut}")
-    public ResponseEntity<?> findByStatus(@PathVariable("statut") String status) {
-        try {
-            List<Contact> contacts = contactService.findByStatus(status);
-            return ResponseEntity.ok().body(contacts);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
-    }
+
+   
+  
    
 
     @DeleteMapping("/delete/{id}")
@@ -102,6 +78,7 @@ public class ContactController {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
+    
 
 
     

@@ -26,7 +26,7 @@ public class Contact {
     private String service;
     private Long createdBy;
     private String type;
-    private String status;
+   
     private String provenance;
 
     
@@ -44,7 +44,9 @@ public class Contact {
    
    
     private List<String> Domains= new ArrayList<>();
+    private String otherDomains;
     private List<String> tools = new ArrayList<>();
+    private String otherTools;
    
 
     @Column(name = "creation_date")

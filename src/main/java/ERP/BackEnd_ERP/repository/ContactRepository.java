@@ -20,6 +20,6 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
 
 
     
-    List<Contact> findByStatus(String status);
+   
     
 }
