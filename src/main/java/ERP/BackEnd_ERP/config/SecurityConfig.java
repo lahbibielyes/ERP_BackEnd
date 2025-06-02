@@ -42,17 +42,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .cors(cors -> cors.configurationSource(corsConfigurationSource())) //autorise les appels depuis http://localhost:4200
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
 
-                .requestMatchers("/api/auth/**" , "/api/company/**","/api/user/**","/api/besoin/**","/api/contact/**","/api/historique_besoin/**","/api/type-actions/**","/api/action-besoin/**","/api/action-crm/**").permitAll()
+                .requestMatchers("/api/auth/**").permitAll()
                 .anyRequest().authenticated()
             )
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //pour l'authentification on compte uniquement sur lesjwt tokens
             .authenticationManager(authenticationManager);
 
-        // Ajout des filtres de sécurité JWT
+        // Ajout des filtres de sécurité le premier intercepte le requetes de login et l'autre intercepte les autres requetes
         http.addFilter(new JwtAuthenticationFilter(authenticationManager, jwtUtils,userService));
         http.addFilterBefore(new JwtAuthorizationFilter(authenticationManager, jwtUtils), UsernamePasswordAuthenticationFilter.class);
 
