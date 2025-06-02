@@ -43,10 +43,11 @@ public class Contact {
 
    
    
-    private List<String> Domains= new ArrayList<>();
-    private String otherDomains;
-    private List<String> tools = new ArrayList<>();
-    private String otherTools;
+   
+    private String Domains;
+    
+    private String Tools;
+    private boolean isActive = true;
    
 
     @Column(name = "creation_date")

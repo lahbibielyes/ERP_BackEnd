@@ -46,10 +46,10 @@ public class ContactService {
         c.setService(contact.getService());
         c.setCreatedBy(contact.getCreatedBy());
         c.setType(contact.getType());
-        c.setOtherDomains(contact.getOtherDomains());
-        c.setOtherTools(contact.getOtherTools());
+        c.setDomains(contact.getDomains());
+        c.setTools(contact.getTools());
         
-       
+       c.setActive(contact.isActive());
         c.setProvenance(contact.getProvenance());
         
         c.setAgency(contact.getAgency());
@@ -60,20 +60,12 @@ public class ContactService {
         c.setCity(contact.getCity());
        
         c.setCountry(contact.getCountry());
+         // On désactive le contact au lieu de le supprimer
         
         
         
         // Pour les listes, on peut soit les remplacer complètement, soit faire un addAll après clear
-        if (contact.getDomains() != null) {
-            c.getDomains().clear();
-            c.getDomains().addAll(contact.getDomains());
-        }
-        
-        if (contact.getTools() != null) {
-            c.getTools().clear();
-            c.getTools().addAll(contact.getTools());
-        }
-        
+     
       
         c.setCompany(contact.getCompany());
         
@@ -83,10 +75,15 @@ public class ContactService {
     public void deleteContactById(Long id) {
         contactRepository.deleteById(id);
     }
-
+public void inAtiveContact(Long id) {
+    Contact contact = contactRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Contact not found"));
+         boolean c =contact.isActive();
+    contact.setActive(!c); // Inverse l'état actif du contact
+    contactRepository.save(contact); // Enregistre le contact mis à jour
      
     }
-    
+}
     
     
   
