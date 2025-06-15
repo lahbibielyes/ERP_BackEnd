@@ -46,7 +46,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
 
-                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/auth/**","/api/action-besoin/files/**","/api/action-crm/files/**").permitAll()
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //pour l'authentification on compte uniquement sur lesjwt tokens
