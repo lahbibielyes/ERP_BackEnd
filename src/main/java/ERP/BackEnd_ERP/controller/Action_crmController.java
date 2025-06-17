@@ -38,7 +38,7 @@ public class Action_crmController {
     @GetMapping("/files/{filename}")
 public ResponseEntity<Resource> getFile(@PathVariable String filename) throws IOException {
     // Construction du chemin vers le fichier
-    Path filePath = Paths.get("uploads/").resolve(filename).normalize();
+    Path filePath = Paths.get("uploads_crm/").resolve(filename).normalize();
     System.out.println(filePath);
     Resource resource = new UrlResource(filePath.toUri());
     System.out.println("rrrrrrrrrrrrrrrr"+resource);
